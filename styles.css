@@ -1,0 +1,59 @@
+body {
+  background-color: #6e0881;
+}
+
+.title {
+  font-family: 'Sigmar One', cursive;
+  color: #e4e514;
+  text-align: center;
+  text-shadow: 3px 3px #450345;
+}
+
+.squares {
+  margin-top: 100px;
+  filter: drop-shadow(3px 3px #450345);
+  text-align: center;
+}
+
+.redSquare, .blueSquare, .greenSquare, .yellowSquare {
+  border: solid 10px;
+  border-radius: 50px;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+}
+
+.redSquare {
+  background-color: red;
+}
+
+.blueSquare {
+  background-color: blue;
+  margin-left: 20px;
+}
+
+.greenSquare {
+  background-color: green;
+  position: relative;
+  /* top: 290px;
+  right:685px; */
+}
+
+.yellowSquare {
+  background-color: yellow;
+  position: relative;
+  margin-left: 20px;
+  /* top: 290px;
+  right:477px; */
+}
+
+.pressed
+{
+  background-color: grey;
+  filter: dop-shadow(7px 7px 450345);
+}
+
+.wrong
+{
+  background-color:red;
+}
