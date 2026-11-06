@@ -316,6 +316,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .resume .when + .where + ul { margin-top: 10px; }
 .resume ul li + li { margin-top: 4px; }
 .resume-summary { grid-column: span 3; font-size: 1rem; line-height: 1.6; color: var(--ink-soft); max-width: 70ch; }
+.resume-cta { margin-top: 28px; }
+.resume-cta a { font-weight: 500; border-bottom: 2px solid currentColor; padding-bottom: 2px; }
 
 @media (max-width: 900px) {
   .resume-row { grid-template-columns: 1fr 1fr; }
