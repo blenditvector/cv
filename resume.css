@@ -1,0 +1,204 @@
+/* Resume template: letter pages (612pt x 792pt), flow layout, single reading column. */
+:root {
+  --cyan: #a4eeff;
+  --cyan-light: #e6faff;
+  --cyan-ink: #1d5f70;     /* readable cyan-family text */
+  --yellow: #ffc200;
+  --ink: #0d0d0d;
+  --ink-soft: #2b2f31;
+  --muted: #5b6468;
+  /* Same typeface as the portfolio site (assets/style.css --font). */
+  --body: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Rubik", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --desk: #e9edf0;
+  --gutter: 40pt;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--desk);
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Toolbar (screen only) ---------- */
+.toolbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 12px 16px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid #d5dde2;
+  font: 500 14px/1.2 var(--body);
+}
+.toolbar .actions { display: flex; gap: 8px; }
+.switch { display: flex; padding: 3px; border-radius: 999px; background: #eef2f4; }
+.switch a { padding: 7px 14px; border-radius: 999px; font-weight: 500; font-size: 13px; color: #55606a; }
+.switch a[aria-current="page"] { background: var(--cyan); color: #000; }
+@media (max-width: 520px) { .switch { order: 3; width: 100%; justify-content: center; } }
+.btn {
+  appearance: none; border: 1px solid #1a1a1a; border-radius: 999px;
+  padding: 9px 16px; font: 500 13px/1 var(--body); letter-spacing: .02em;
+  background: #fff; color: #1a1a1a; cursor: pointer;
+}
+.btn.primary { background: var(--yellow); border-color: var(--yellow); }
+.btn:disabled { opacity: .6; cursor: progress; }
+.btn:focus-visible, .toolbar a:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+
+/* ---------- Page stack ---------- */
+.stage { padding: 24px 16px 48px; overflow: hidden; }
+.stack { width: 612pt; margin: 0 auto; transform-origin: top left; }
+.page {
+  position: relative;
+  width: 612pt; height: 792pt;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 18px rgba(0,0,0,.12);
+  margin-bottom: 24px;
+  display: flex; flex-direction: column;
+}
+
+/* ---------- Hero header (page 1) ---------- */
+.hero {
+  position: relative; z-index: 2;
+  background: var(--cyan);
+  border-bottom-left-radius: 34pt;
+  padding: 30pt var(--gutter) 20pt;
+}
+/* Concave corner where one band meets the next (CSS only, so the PDF export renders it). */
+.corner { position: absolute; right: 0; width: 26pt; height: 26pt; display: block; }
+.corner::after { content: ""; position: absolute; inset: 0; border-top-right-radius: 26pt; }
+.c-hero { background: var(--cyan); }
+.c-hero::after { background: var(--cyan-light); }
+.c-band { background: var(--cyan-light); }
+.c-band::after { background: #fff; }
+.hero .corner { bottom: -26pt; }
+.name { font: 700 29pt/1 var(--body); letter-spacing: .005em; text-transform: uppercase; }
+.role {
+  margin-top: 5pt;
+  font: 700 13.5pt/1.1 var(--body); letter-spacing: .03em; text-transform: uppercase;
+}
+.contact {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6pt 16pt;
+  margin-top: 13pt;
+  font: 500 10pt/1.2 var(--body);
+}
+.contact span, .contact a { display: inline-flex; align-items: center; gap: 4.5pt; }
+.contact svg { width: 11pt; height: 11pt; flex: none; }
+.contact .pill {
+  padding: 3.5pt 10pt; border-radius: 999px; background: var(--ink); color: #fff;
+  font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 8.5pt;
+}
+
+/* ---------- Summary band ---------- */
+.band {
+  position: relative; z-index: 1;
+  background: var(--cyan-light);
+  margin-top: -34pt; /* tuck under the hero so its rounded corner shows the band */
+  padding: 52pt var(--gutter) 18pt;
+}
+.band .corner { bottom: -26pt; }
+.band p { margin-top: 6pt; font: 400 10.5pt/15pt var(--body); color: var(--ink-soft); }
+.band p + p { margin-top: 6pt; }
+
+/* Impact strip */
+.impact {
+  display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 8pt;
+  margin-top: 13pt; list-style: none;
+}
+.impact li {
+  background: #fff; border-radius: 9pt; padding: 8pt 10pt 9pt;
+  border: 1px solid var(--yellow);
+}
+.impact b { display: block; font: 700 17pt/1 var(--display); color: var(--ink); }
+.impact span { display: block; margin-top: 4pt; font: 500 8pt/1.25 var(--body); color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+
+/* ---------- Body ---------- */
+.body { padding: 18pt var(--gutter) 0; flex: 1; }
+.body > section + section { margin-top: 15pt; }
+
+h2 {
+  display: flex; align-items: center; gap: 10pt;
+  font: 700 12.5pt/1.2 var(--display); letter-spacing: .02em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.body h2::after { content: ""; flex: 1; border-top: 1.2pt solid var(--yellow); }
+h3 { font: 700 9.5pt/1.2 var(--body); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Experience ---------- */
+.job { margin-top: 11pt; }
+.job + .job { margin-top: 15pt; }
+.job-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12pt; }
+.job-title { font: 700 12.5pt/1.2 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); }
+.job-org { margin-top: 2pt; font: 500 10.5pt/1.2 var(--body); color: var(--cyan-ink); }
+.dates {
+  flex: none; padding: 3pt 9pt; border-radius: 999px;
+  background: var(--cyan-light); font: 500 9.5pt/1 var(--body); color: var(--ink-soft);
+}
+.bullets { list-style: none; margin-top: 7pt; display: grid; gap: 5pt; }
+.bullets li {
+  position: relative; padding-left: 13pt;
+  font: 400 10.5pt/14pt var(--body); color: var(--ink-soft);
+}
+.bullets li::before {
+  content: ""; position: absolute; left: 1pt; top: 4.6pt;
+  width: 5pt; height: 5pt; border-radius: 50%; background: var(--yellow);
+}
+
+/* ---------- Skills ---------- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt 26pt; margin-top: 11pt; }
+.grid-2 > div > h3 + * { margin-top: 7pt; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 4pt; }
+.chips li {
+  padding: 2.5pt 8pt; border-radius: 999px; background: var(--cyan-light);
+  font: 500 9pt/1.2 var(--body); color: var(--ink-soft);
+}
+.kv { display: grid; grid-template-columns: 62pt 1fr; gap: 5pt 8pt; font: 400 10pt/13.5pt var(--body); color: var(--ink-soft); }
+.kv dt { font-weight: 700; color: var(--ink); }
+
+/* ---------- Education ---------- */
+.edu-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt 16pt; margin-top: 11pt; }
+.edu-list li { display: flex; align-items: flex-start; gap: 7pt; }
+.edu-list .yr {
+  flex: none; width: 32pt; height: 32pt; border-radius: 50%; background: var(--yellow);
+  display: flex; align-items: center; justify-content: center;
+  font: 700 8.5pt/1 var(--display); color: var(--ink);
+}
+.edu-list b { display: block; font: 700 9.5pt/1.25 var(--body); }
+.edu-list div > span { display: block; margin-top: 1pt; font: 400 9pt/1.3 var(--body); color: var(--ink-soft); }
+
+.refs-line { font: 400 10.5pt/1.3 var(--body); color: var(--ink-soft); margin-top: 8pt; }
+.refs-line b { font-weight: 700; color: var(--ink); }
+
+/* ---------- Running header (pages 2+) ---------- */
+.runhead {
+  position: relative;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12pt;
+  background: var(--cyan); border-bottom-left-radius: 26pt;
+  padding: 15pt var(--gutter) 11pt;
+}
+.runhead .name { font-size: 16pt; }
+.runhead .role { margin-top: 0; font-size: 9.5pt; }
+
+/* ---------- Footer ---------- */
+.foot {
+  display: flex; justify-content: space-between;
+  padding: 0 var(--gutter) 18pt;
+  font: 500 8pt/1 var(--body); color: var(--muted); letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* ---------- Print: exact letter pages ---------- */
+@page { size: letter; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .toolbar { display: none !important; }
+  .stage { padding: 0; overflow: visible; }
+  .stack { transform: none !important; height: auto !important; width: 612pt; margin: 0; }
+  .page { box-shadow: none; margin: 0; break-after: page; page-break-after: always; }
+  .page:last-child { break-after: auto; page-break-after: auto; }
+}
+
+.edu-list .yr.sm { font-size: 6pt; letter-spacing: -.01em; }
