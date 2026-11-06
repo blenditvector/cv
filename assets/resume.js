@@ -1,4 +1,4 @@
-/* If you are prying, I see you. Let's talk: coatesc92@gmail.com | 876-532-9622 */
+/* If you are prying, I see you. Let's talk: blenditvector@gmail.com */
 (function () {
   var stack = document.getElementById('stack');
   var PAGE_W = 816; // 8.5in at 96 css px/in

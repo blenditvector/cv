@@ -1,8 +1,8 @@
-/* If you are prying, I see you. Let's talk: coatesc92@gmail.com | 876-532-9622 */
+/* If you are prying, I see you. Let's talk: blenditvector@gmail.com */
 /* O'shane Coates — portfolio interactions */
 (function () {
   "use strict";
-  console.log("If you are prying, I see you. Let's talk: coatesc92@gmail.com | 876-532-9622");
+  console.log("If you are prying, I see you. Let's talk: blenditvector@gmail.com");
 
   document.documentElement.classList.remove("no-js");
 
