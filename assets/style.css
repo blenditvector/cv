@@ -571,6 +571,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   color: var(--cs-accent);
 }
 .cs-title .sub { margin-top: 12px; font-size: 1.05rem; }
+.cs-links { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 0.92rem; }
+.cs-links a { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; overflow-wrap: anywhere; }
+.cs-links a:hover, .cs-links a:focus-visible { border-bottom-color: currentColor; }
+.cs-links svg { flex: none; color: var(--cs-accent); }
 .cs-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 0.92rem; }
 .cs-meta dt { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4px; }
 .cs-meta dd { margin: 0; font-weight: 400; }
