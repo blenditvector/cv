@@ -630,6 +630,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .os-fig figcaption span { opacity: 0.65; }
 .os-social { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 24px); align-items: end; max-width: 960px; }
 .os-social img { width: 100%; height: auto; border-radius: 8px; }
+.os-posts { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 24px); }
+.os-posts img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+@media (max-width: 900px) { .os-posts { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .os-posts figcaption { flex-direction: column; gap: 2px; } }
 @media (max-width: 640px) {
   .os-logos, .os-social { grid-template-columns: 1fr; }
   .os-motifs figcaption { flex-direction: column; gap: 2px; }
