@@ -125,6 +125,81 @@
     });
   }
 
+  // Motion carousel: arrows + dots on the reel (swipe / scroll-snap still works)
+  document.querySelectorAll(".motion-group").forEach(function (group) {
+    var reel = group.querySelector(".motion-reel");
+    if (!reel) return;
+    var slides = Array.prototype.slice.call(reel.children);
+    if (!slides.length) return;
+    var label = "Motion";
+
+    var bar = document.createElement("div");
+    bar.className = "motion-bar";
+    reel.parentNode.insertBefore(bar, reel);
+
+    var nav = document.createElement("div");
+    nav.className = "carousel-nav";
+    nav.innerHTML =
+      '<button type="button" class="carousel-btn" data-dir="-1" aria-label="Previous ' + label + ' video">' +
+      '<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12.5 4l-6 6 6 6"/></svg></button>' +
+      '<button type="button" class="carousel-btn" data-dir="1" aria-label="Next ' + label + ' video">' +
+      '<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7.5 4l6 6-6 6"/></svg></button>';
+    bar.appendChild(nav);
+    var prev = nav.children[0], next = nav.children[1];
+
+    var dots = document.createElement("div");
+    dots.className = "carousel-dots";
+    slides.forEach(function (slide, i) {
+      var d = document.createElement("button");
+      d.type = "button";
+      d.setAttribute("aria-label", "Go to " + label + " video " + (i + 1) + " of " + slides.length);
+      d.addEventListener("click", function () { goTo(i); });
+      dots.appendChild(d);
+    });
+    reel.parentNode.insertBefore(dots, reel.nextSibling);
+
+    function step() {
+      if (slides.length < 2) return reel.clientWidth;
+      return slides[1].offsetLeft - slides[0].offsetLeft;
+    }
+    function goTo(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      reel.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: "smooth" });
+    }
+    function update() {
+      var max = reel.scrollWidth - reel.clientWidth;
+      group.classList.toggle("is-static", max <= 2);
+      prev.disabled = reel.scrollLeft <= 2;
+      next.disabled = reel.scrollLeft >= max - 2;
+      var active = Math.round(reel.scrollLeft / step());
+      if (reel.scrollLeft >= max - 2) active = slides.length - 1;
+      Array.prototype.forEach.call(dots.children, function (d, i) {
+        d.classList.toggle("is-active", i === active);
+        if (i === active) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+      });
+    }
+    nav.addEventListener("click", function (e) {
+      var btn = e.target.closest(".carousel-btn");
+      if (!btn) return;
+      reel.scrollBy({ left: step() * Number(btn.getAttribute("data-dir")), behavior: "smooth" });
+    });
+    var raf;
+    reel.addEventListener("scroll", function () {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+
+  // Motion videos: only one plays at a time
+  var motionVideos = Array.prototype.slice.call(document.querySelectorAll(".motion-video video"));
+  motionVideos.forEach(function (v) {
+    v.addEventListener("play", function () {
+      motionVideos.forEach(function (o) { if (o !== v && !o.paused) o.pause(); });
+    });
+  });
+
   // Footer year
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
