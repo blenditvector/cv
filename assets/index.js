@@ -1,5 +1,5 @@
 /* If you are prying, I see you. Let's talk: blenditvector@gmail.com */
-/* O'shane Coates — portfolio interactions */
+/* O'shane — portfolio interactions */
 (function () {
   "use strict";
   console.log("If you are prying, I see you. Let's talk: blenditvector@gmail.com");

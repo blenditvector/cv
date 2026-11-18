@@ -92,8 +92,8 @@
           pdf.link((r.left - pr.left) * k, (r.top - pr.top) * k, r.width * k, r.height * k, { url: a.href });
         });
       }
-      var name = document.body.getAttribute('data-pdf-name') || 'Oshane_Coates_Resume';
-      pdf.setProperties({ title: document.title, author: "O'shane Coates", subject: 'Resume' });
+      var name = document.body.getAttribute('data-pdf-name') || 'Oshane_Resume';
+      pdf.setProperties({ title: document.title, author: "O'shane", subject: 'Resume' });
       pdf.save(name + '.pdf');
     } catch (err) {
       console.error(err);
